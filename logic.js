@@ -1,7 +1,7 @@
 const Tweeter = function () {
 
-    let postIdCounter = 2 //?????? supposed to be a number?
-    let commentIdCounter = 6 //????? supposed to be a number?
+    let postIdCounter = 2
+    let commentIdCounter = 6
 
     let posts = [
         {
@@ -28,20 +28,21 @@ const Tweeter = function () {
 
     const addPost = function (text) {
         postIdCounter++
-        let newPost = {
+        let post = {
             text,
             id: `p` + postIdCounter,
             comments: []
         }
-        posts.push(newPost)
+        posts.push(post)
     }
 
 
     const removePost = function (postID) {
         for (let i in posts) {
-            if (posts[i].id === postID)
+            if (posts[i].id === postID) {
                 posts.splice(i, 1)
-            return
+                return
+            }
         }
     }
 
@@ -51,16 +52,17 @@ const Tweeter = function () {
                 commentIdCounter++
                 posts[i].comments.push({
                     id: 'c' + commentIdCounter,
-                    text
+                    text: text
                 })
             }
+
         }
     }
 
 
     const removeComment = function (postID, commentID) {
         for (let post of posts) {
-            if (posts.id == postID) {
+            if (post.id == postID) {
                 const commentsArray = post.comments
                 for (let i in commentsArray) {
                     if (commentsArray[i].id == commentID) {
@@ -83,37 +85,3 @@ const Tweeter = function () {
         removeComment
     }
 }
-
-// const tweeter = Tweeter()
-
-// tweeter.addPost("This is my own post!")
-// console.log(tweeter.getPosts())
-//This should be added to the posts array:
-//{text: "This is my own post!", id: "p3", comments: []}
-
-// tweeter.removePost("p1")
-// console.log(tweeter.getPosts())
-//There should only be two posts in the post's array:
-//{text: "Aw man, I wanted to be first", id: "p2", comments: Array(3)}
-//{text: "This is my own post!", id: "p3", comments: []}
-
-//============================
-//============================
-//Stop here
-//Make sure everything works. Then keep going
-//============================
-//============================
-
-// tweeter.addComment("Damn straight it is!", "p3")
-// tweeter.addComment("Second the best!", "p2")
-// console.log(tweeter.getPosts())
-//This should be added to the third post's comments array:
-//{id: "c7", text: "Damn straight it is!"}
-
-//This should be added to the second post's comments array:
-//{id: "c8", text: "Second the best!"}
-
-// tweeter.removeComment("p2", "c6")
-// console.log(tweeter.getPosts())
-//This comment should be removed:
-//{id: "c6", text: "Haha second place what a joke."}
